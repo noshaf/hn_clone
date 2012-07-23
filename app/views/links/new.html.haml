@@ -1,0 +1,7 @@
+%h1 Links#new
+=form_for @link do |l|
+	%p Title:
+	= l.text_field :title
+	%p URL: 
+	= l.text_field :url
+	= l.submit
