@@ -1,2 +1,3 @@
 %h1 Links#index
-%p Find me in app/views/links/index.html.haml
+- @links.each do |l|
+	%li= link_to l.title, l.url

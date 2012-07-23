@@ -1,2 +1,7 @@
 %h1 Links#new
-%p Find me in app/views/links/new.html.haml
+=form_for @link do |l|
+	%p Title:
+	= l.text_field :title
+	%p URL: 
+	= l.text_field :url
+	= l.submit
