@@ -14,7 +14,9 @@ class LinksController < ApplicationController
   end
 
   def create
-    @link = Link.create(params[:link])
+    @link = Link.new(params[:link])
+    @link.clean_url
+    @link.save!
     redirect_to link_path(@link)
   end
 
