@@ -2,7 +2,11 @@ class LinksController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
   
   def index
-    @links = Link.all
+    if params[:user_id]
+      @links = Link.where(:user_id => params[:user_id])
+    else
+      @links = Link.all
+    end
   end
 
   def show
@@ -14,7 +18,7 @@ class LinksController < ApplicationController
   end
 
   def create
-    @link = Link.new(params[:link])
+    @link = Link.new params[:link].merge user_id: current_user.id 
     if @link.save
       redirect_to link_path(@link)
     else

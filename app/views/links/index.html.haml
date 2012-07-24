@@ -1,3 +1,6 @@
 %h1 Links#index
 - @links.each do |l|
-	%li= link_to l.title, l.url
+  =link_to l.title, l.url
+  -if current_user && current_user.id == l.user_id
+    = link_to "Edit", edit_link_path(l)
+  %br
