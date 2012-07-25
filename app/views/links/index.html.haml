@@ -2,5 +2,5 @@
 - @links.each do |l|
   =link_to l.title, l.url
   -if current_user && current_user.id == l.user_id
-    = link_to "Edit", edit_link_path(l)
+    = link_to "Edit", edit_link_path(l) 
   %br

@@ -1,2 +1,8 @@
-%h1 Links#edit
-%p Find me in app/views/links/edit.html.haml
+%h1 Edit Link
+
+=form_for @link do |l|
+	%p Title:
+	= l.text_field :title
+	%p URL: 
+	= l.text_field :url
+	= l.submit

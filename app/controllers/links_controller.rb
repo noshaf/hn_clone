@@ -27,9 +27,13 @@ class LinksController < ApplicationController
   end
 
   def edit
+    @link = Link.find_by_id(params[:id])
   end
 
   def update
+    @link = Link.find_by_id(params[:id])
+    @link.update_attributes(params[:link])
+    redirect_to link_path(@link)
   end
 
   def destroy
