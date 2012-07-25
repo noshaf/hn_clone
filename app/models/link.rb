@@ -11,6 +11,13 @@ class Link < ActiveRecord::Base
   end
   
   def editable 
-   raise "YOU'RE TOO SLOW" if self.created_at && Time.now - self.created_at > 900
+    if self.created_at && Time.now - self.created_at > 900
+      errors.add(:base, "You cannot edit links more than 15 minutes after posting.")
+    end
   end
+  
+  def editable?
+    self.created_at && Time.now - self.created_at < 900
+  end
+  
 end
