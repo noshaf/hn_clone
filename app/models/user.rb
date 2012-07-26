@@ -10,4 +10,13 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   
   has_many :links
+  
+  has_many :evaluations, class_name: "RSEvaluation", as: :source
+
+  has_reputation :votes, source: {reputation: :votes, of: :links}, aggregated_by: :sum
+
+  def voted_for?(link)
+    evaluations.where(target_type: link.class, target_id: link.id).present?
+  end
+  
 end

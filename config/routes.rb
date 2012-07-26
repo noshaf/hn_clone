@@ -5,7 +5,9 @@ HnClone::Application.routes.draw do
   match "profile" => "users#show"
   resources :users  
     
-  resources :links
+  resources :links do
+    member { post :vote }
+  end
     
  
 

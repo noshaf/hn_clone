@@ -4,6 +4,7 @@ class Link < ActiveRecord::Base
   validate :editable
   before_save :clean_url
   belongs_to :user
+  has_reputation :votes, source: :user, aggregated_by: :sum
 
   def clean_url
     return self.url if self.url =~ %r{^http://}

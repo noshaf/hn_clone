@@ -5,7 +5,7 @@ class LinksController < ApplicationController
     if params[:user_id]
       @links = Link.where(:user_id => params[:user_id])
     else
-      @links = Link.all
+      @links = Link.find_with_reputation(:votes, :all, order: 'votes desc')
     end
   end
 
@@ -35,10 +35,18 @@ class LinksController < ApplicationController
     if @link.update_attributes(params[:link])
       redirect_to link_path(@link)
     else
-      render 'edit'
+      render 'edit', alert: "You cannot edit after 15 min."
     end
   end
 
   def destroy
   end
+  
+  def vote
+    value = params[:type] == "up" ? 1 : -1
+    @link = Link.find(params[:id])
+    @link.add_evaluation(:votes, value, current_user)
+    redirect_to :back, notice: "Thank you for voting!"
+  end
+  
 end
