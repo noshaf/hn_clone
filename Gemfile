@@ -13,7 +13,7 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails',  '~> 2.9.0'
-  gem 'pry-rails'
+  gem 'jazz_hands'
   gem 'annotate', '~> 2.4.1.beta'
 end
 
@@ -28,3 +28,4 @@ end
 
 gem 'jquery-rails'
 gem 'devise'
+gem 'activerecord-reputation-system', require: 'reputation_system'
