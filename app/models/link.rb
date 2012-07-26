@@ -21,4 +21,22 @@ class Link < ActiveRecord::Base
     self.created_at && Time.now - self.created_at < 900
   end
   
+  def self.order
+    # links = Link.find_with_reputation(:votes, :all, order: 'votes desc')
+    Link.all.sort do |a,b|
+       b.rank <=> a.rank
+    end
+  end
+  
+  def maturity
+    (Time.now - self.created_at) / 3600
+  end
+  
+  def votes
+    self.reputation_value_for(:votes).to_i
+  end
+  
+  def rank
+    self.votes / self.maturity ** 1.8
+  end
 end

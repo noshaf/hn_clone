@@ -5,7 +5,8 @@ class LinksController < ApplicationController
     if params[:user_id]
       @links = Link.where(:user_id => params[:user_id])
     else
-      @links = Link.find_with_reputation(:votes, :all, order: 'votes desc')
+      @links = Link.order
+      # find_with_reputation(:votes, :all, order: 'votes desc')
     end
   end
 
