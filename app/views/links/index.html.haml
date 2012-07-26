@@ -1,12 +1,14 @@
 %center
   %h1 Links#index
-  - @links.each do |l|
-    %h3= link_to l.title, l.url
-    #vote
-      = pluralize l.reputation_value_for(:votes).to_i, "vote"
-      - if current_user && l.user_id != current_user.id
-        |
-        = link_to "upvote", vote_link_path(l, type: "up"), method: "post"
-    -if current_user && current_user.id == l.user_id && l.editable?
-      = link_to "Edit", edit_link_path(l) 
-    %br
+  - @links.each_with_index do |l, i|
+    #links
+      ="#{i+1}."
+      = link_to l.title, l.url
+      #vote
+        = pluralize l.reputation_value_for(:votes).to_i, "vote"
+        - if current_user && l.user_id != current_user.id
+          |
+          = link_to "upvote", vote_link_path(l, type: "up"), method: "post"
+      -if current_user && current_user.id == l.user_id && l.editable?
+        = link_to "Edit", edit_link_path(l) 
+      %br
