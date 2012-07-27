@@ -5,11 +5,6 @@ class Link < ActiveRecord::Base
   before_save :clean_url
   belongs_to :user
   has_reputation :votes, source: :user, aggregated_by: :sum
-
-  def clean_url
-    return self.url if self.url =~ %r{^http://}
-    self.url = "http://#{self.url}" 
-  end
   
   def editable 
     if self.created_at && Time.now - self.created_at > 900
@@ -39,4 +34,12 @@ class Link < ActiveRecord::Base
   def rank
     self.votes / self.maturity ** 1.8
   end
+  
+  private 
+  
+  def clean_url
+    return self.url if self.url =~ %r{^http://}
+    self.url = "http://#{self.url}" 
+  end
+  
 end
