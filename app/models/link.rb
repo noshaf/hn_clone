@@ -4,6 +4,7 @@ class Link < ActiveRecord::Base
   validate :editable
   before_save :clean_url
   belongs_to :user
+  has_many :comments, as: :commentable
   has_reputation :votes, source: :user, aggregated_by: :sum
 
   def clean_url

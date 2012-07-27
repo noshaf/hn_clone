@@ -1,7 +1,7 @@
 %h1 Links#new
-=form_for @link do |l|
+=form_for @link do |f|
 	%p Title:
-	= l.text_field :title
+	= f.text_field :title
 	%p URL: 
-	= l.text_field :url
-	= l.submit
+	= f.text_field :url
+	= f.submit

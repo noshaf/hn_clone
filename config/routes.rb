@@ -1,13 +1,16 @@
 HnClone::Application.routes.draw do
   root to: "links#index"
   
-  devise_for :users 
+  devise_for :users
   match "profile" => "users#show"
   resources :users  
     
   resources :links do
+    resources :comments, :only => [ :create ]
     member { post :vote }
   end
+  
+  resources :comments 
     
  
 

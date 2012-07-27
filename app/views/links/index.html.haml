@@ -9,6 +9,8 @@
         - if current_user && l.user_id != current_user.id
           |
           = link_to "upvote", vote_link_path(l, type: "up"), method: "post"
+        = link_to "Comment", link_path(l)
       -if current_user && current_user.id == l.user_id && l.editable?
         = link_to "Edit", edit_link_path(l) 
       %br
+      

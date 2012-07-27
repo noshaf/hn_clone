@@ -11,7 +11,9 @@ class LinksController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
     @link = Link.find(params[:id])
+    @comment.commentable = @link
   end
 
   def new

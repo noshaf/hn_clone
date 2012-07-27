@@ -1,4 +1,10 @@
 %h1 Links#show
-%p You created:
-= @link.title
-= @link.url
+= link_to @link.title, @link.url
+= form_for [@link, @comment] do |f|
+  =f.text_area(:body, :size => "700x5")
+  %br
+  =f.submit
+- @link.comments.each do  |comment|
+  = comment.user.email
+  = comment.body
+  %br
