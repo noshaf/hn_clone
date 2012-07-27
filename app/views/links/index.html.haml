@@ -1,16 +1,14 @@
-%center
-  %h1 Links#index
+%br
+#row-fluid
+  #span12
   - @links.each_with_index do |l, i|
-    #links
+    .well
       ="#{i+1}."
       = link_to l.title, l.url
       #vote
-        = pluralize l.reputation_value_for(:votes).to_i, "vote"
         - if current_user && l.user_id != current_user.id
-          |
-          = link_to "upvote", vote_link_path(l, type: "up"), method: "post"
+          = link_to image_tag("grayarrow.gif", :size => "10x10"), vote_link_path(l, type: "up"), method: "post"
+        = pluralize l.reputation_value_for(:votes).to_i, "vote"
         = link_to "Comment", link_path(l)
-      -if current_user && current_user.id == l.user_id && l.editable?
-        = link_to "Edit", edit_link_path(l) 
-      %br
-      
+        -if current_user && current_user.id == l.user_id && l.editable?
+          = link_to "Edit", edit_link_path(l) 

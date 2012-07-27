@@ -48,8 +48,12 @@ class LinksController < ApplicationController
   def vote
     value = params[:type] == "up" ? 1 : -1
     @link = Link.find(params[:id])
-    @link.add_evaluation(:votes, value, current_user)
-    redirect_to :back, notice: "Thank you for voting!"
+    begin
+      @link.add_evaluation(:votes, value, current_user)
+      redirect_to :back, notice: "Thank you for voting!"
+    rescue 
+      redirect_to :back, :alert => "You can't vote more than once on one link."
+    end
   end
   
 end

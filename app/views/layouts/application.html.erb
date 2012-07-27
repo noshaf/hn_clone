@@ -15,24 +15,17 @@
 	    	<div class="container">
 
 	    	<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-		    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-		    <span class="icon-bar"></span>
-		    <span class="icon-bar"></span>
-		    <span class="icon-bar"></span>
-		    </a>
 
 		    <!-- Be sure to leave the brand out there if you want it shown -->
 		    <a class="brand" href="#">DBC-News</a>
 
 		    <!-- Everything you want hidden at 940px or less, place within here -->
-		    <div class="nav-collapse">
 				<ul class ="nav">
 					<li><%= link_to "Home", root_path %> </li>
 					<li><%= link_to "Submit a Link", new_link_path %> </li>
 					<% if user_signed_in? %>
-          Logged in as <strong><%= current_user.email %></strong>
           <li><%= link_to "My links", links_path(:user_id => current_user.id) %></li>
-          <li><%= link_to 'Edit profile', edit_user_registration_path %> </li>
+          <li><%= link_to current_user.email, edit_user_registration_path %></li>
           <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
         <% else %>
           <li><%= link_to "Sign up", new_user_registration_path %></li>
@@ -41,21 +34,15 @@
 				</ul>
 		    <!-- .nav, .navbar-search, .navbar-form, etc -->
 		    </div>
-	    	</div>
 	  	</div>
 	  </div>
 	  
-	  <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+	  <%= content_tag :p, flash[:notice], :class => "notice" if flash[:notice] %>
+    <%= content_tag :p, flash[:alert], :class => "alert" if flash[:alert] %>
 	
-<div class = "container">
-	<div class = "row">
-		<div class = "span9">
+<div class = "container-fluid">
 			<%= yield %>
-		</div>
-		<div class = "span3">
-		</div>
-	</div>
+
 </div>
 
 

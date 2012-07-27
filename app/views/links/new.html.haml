@@ -1,7 +1,11 @@
-%h1 Links#new
-=form_for @link do |f|
-	%p Title:
-	= f.text_field :title
-	%p URL: 
-	= f.text_field :url
-	= f.submit
+.hero-unit
+  %h2 Submit a New Link 
+  %br
+  =form_for @link do |f|
+    Title:
+    = f.text_field :title
+    %br
+    URL: 
+    = f.text_field :url
+    %br
+    = f.submit
